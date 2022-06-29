@@ -10,7 +10,6 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -73,15 +72,5 @@ public class OrdemServicoController {
 	
 	private OrdemServico toEntity(OrdemServicoInput ordemServicoInput) {
 		return modelMapper.map(ordemServicoInput, OrdemServico.class);
-	}
-	
-	@DeleteMapping("/{ordemServicoId}")
-	public ResponseEntity<Void> remover(@PathVariable Long ordemServicoId) {
-		if(!ordemServicoRepository.existsById(ordemServicoId)) {
-			return ResponseEntity.notFound().build();
-		}
-		gestaoOrdemServico.excluir(ordemServicoId);
-		return ResponseEntity.noContent().build();
-		
 	}
 }
